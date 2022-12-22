@@ -27,4 +27,5 @@ for i, filename in enumerate(os.listdir()):
     print(i, filename, new_name)
 
 filenames_file = open("filenames.js", "w")
+filenames_file.write("let filenames = ")
 filenames_file.write(json.dumps(names))
