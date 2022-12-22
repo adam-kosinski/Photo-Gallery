@@ -31,6 +31,7 @@ img {
     width: var(--image-width);
     position: relative;
     cursor: pointer;
+    outline: 0px solid transparent; /* so it will transition */
     transition: all 0.5s;
 }
 
