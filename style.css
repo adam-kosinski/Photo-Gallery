@@ -27,15 +27,17 @@ body {
     gap: var(--gap);
 }
 
+.img_container {
+    cursor: pointer;
+}
+
 img {
     width: var(--image-width);
-    position: relative;
-    cursor: pointer;
     outline: 0px solid transparent; /* so it will transition */
     transition: all 0.5s;
 }
 
-img:hover {
+.img_container:hover img {
     transform: scale(0.95);
     outline: calc(0.025*var(--image-width)) solid white;
 }

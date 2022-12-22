@@ -6,8 +6,11 @@ function addImage(i){
     let cols = document.querySelectorAll(".column");
     let n_cols = cols.length;
 
+    let div = document.createElement("div");
+    div.classList.add("img_container");
     let img = document.createElement("img");
     img.src = "images/small/" + filenames[i];
+    div.appendChild(img);
 
     let shortest;
     let min_height = Infinity;
@@ -19,7 +22,7 @@ function addImage(i){
         }
     }
 
-    shortest.appendChild(img);
+    shortest.appendChild(div);
 
     if(i+1 < filenames.length){
         img.addEventListener("load", function(){
