@@ -34,9 +34,15 @@ img {
     width: var(--image-width);
     outline: 0px solid transparent; /* so it will transition */
     transition: all 0.5s;
+    animation: fade_in 1s;
 }
 
 .img_container:hover img {
     transform: scale(0.95);
     outline: calc(0.025*var(--image-width)) solid white;
+}
+
+@keyframes fade_in {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
