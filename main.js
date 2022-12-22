@@ -9,7 +9,7 @@ function addImage(i){
     let div = document.createElement("div");
     div.classList.add("img_container");
     let img = document.createElement("img");
-    img.src = "images/small/" + filenames[i];
+    img.src = "images/" + filenames[i];
     div.appendChild(img);
 
     let shortest;
@@ -27,6 +27,7 @@ function addImage(i){
     if(i+1 < filenames.length){
         img.addEventListener("load", function(){
             addImage(i+1);
+            img.classList.add("loaded");
         });
     }
 }

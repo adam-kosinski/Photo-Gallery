@@ -23,6 +23,7 @@ body {
 .column {
     display: flex;
     flex-direction: column;
+    width: var(--image-width); /* needed to preserve layout if images haven't loaded yet */
     gap: var(--gap);
 }
 
@@ -34,7 +35,11 @@ img {
     width: var(--image-width);
     outline: 0px solid transparent; /* so it will transition */
     transition: all 0.5s;
+    opacity: 0;
+}
+img.loaded {
     animation: fade_in 1s;
+    animation-fill-mode: forwards;
 }
 
 .img_container:hover img {
