@@ -1,0 +1,40 @@
+:root {
+    --width-no-scrollbar: calc(100vw - 17px); /* scrollbar width seems to be 17px */
+    --image-width: 30vw;
+    --gap: calc((var(--width-no-scrollbar) - 3*var(--image-width)) / 4);
+}
+
+html {
+    background-color: black;
+}
+
+body {
+    margin: 0;
+    padding: var(--gap);
+}
+
+.row {
+    display: flex;
+    gap: var(--gap);
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    width: var(--image-width);
+    gap: var(--gap);
+}
+
+img {
+    width: var(--image-width);
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+img:hover {
+    transform: scale(0.95);
+    outline: 0.75vw solid white;
+}
