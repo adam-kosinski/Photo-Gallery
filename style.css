@@ -37,5 +37,5 @@ img {
 
 img:hover {
     transform: scale(0.95);
-    outline: 0.75vw solid white;
+    outline: calc(0.025*var(--image-width)) solid white;
 }
