@@ -17,13 +17,12 @@ body {
     display: flex;
     gap: var(--gap);
     justify-content: center;
-    align-items: flex-start;
+    align-items: flex-start; /* needed for accurate column height measurements in main.js */
 }
 
 .column {
     display: flex;
     flex-direction: column;
-    width: var(--image-width);
     gap: var(--gap);
 }
 
