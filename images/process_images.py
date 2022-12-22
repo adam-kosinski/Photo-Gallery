@@ -35,8 +35,8 @@ for i, filename in enumerate(os.listdir()):
     #     img = Image.open(filename)
     #     small_img = img.copy()
     #     small_img = ImageOps.exif_transpose(small_img) # keep correct rotation
-    #     small_img = small_img.resize((375,500))
-    #     small_img.save("small/" + filename)
+    #     # small_img = small_img.thumbnail((1200,1200))
+    #     small_img.save("small/" + filename, quality=95) # highest quality
 
 
 filenames_file = open("filenames.js", "w")
