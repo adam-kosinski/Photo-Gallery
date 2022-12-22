@@ -9,7 +9,7 @@ function addImage(i){
     let div = document.createElement("div");
     div.classList.add("img_container");
     let img = document.createElement("img");
-    img.src = "images/" + filenames[i];
+    img.src = "images/small/" + filenames[i];
     div.appendChild(img);
 
     let shortest;
