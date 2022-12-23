@@ -47,7 +47,7 @@ function addImage(i) {
 
 
 //keep track of the most center element so that when we resize the window, we can scroll to it
-window.addEventListener("scroll", function(e){
+document.getElementById("scroll_container").addEventListener("scroll", function(e){
     if(last_resize_time + 50 < performance.now()){ //hack to prevent scrollIntoView from triggering a scroll event and changing the center element
         centerElement = getCenterElement();
     }

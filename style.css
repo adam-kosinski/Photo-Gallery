@@ -15,7 +15,7 @@ body {
 
 #scroll_container {
     padding: var(--gap);
-    height: 100vh;
+    height: calc(100vh - 2*var(--gap));
     overflow-y: auto;
 }
 
@@ -84,7 +84,7 @@ img {
     background-color: black;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
-    cursor: url('x.png'), auto;
+    cursor: url('x.png') 15 15, auto;
 }
 #zoom_img_container img {
     position: absolute;
