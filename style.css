@@ -68,6 +68,7 @@ img {
     background-color: black;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
+    cursor: url('x.png'), auto;
 }
 #zoom_img_container img {
     position: absolute;

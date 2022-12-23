@@ -48,11 +48,6 @@ function addImage(i) {
 
 //keep track of the most center element so that when we resize the window, we can scroll to it
 window.addEventListener("scroll", function(e){
-    //don't let the page scroll if an image is open / being opened
-    if(getComputedStyle(document.getElementById("zoom_img_container")).display == "block"){
-        e.preventDefault();
-        return;
-    }
     if(last_resize_time + 50 < performance.now()){ //hack to prevent scrollIntoView from triggering a scroll event and changing the center element
         centerElement = getCenterElement();
     }
@@ -112,12 +107,18 @@ document.addEventListener("keydown", function(e){
         closeImage();
     }
 });
+document.getElementById("zoom_img_container").addEventListener("click", function(e){
+    if(e.target.tagName != "IMG"){
+        closeImage();
+    }
+});
 function closeImage(){
     document.body.style.overflowY = "initial"; //show the scroll bar
 
     let zoom_img_container = document.getElementById("zoom_img_container");
     let zoom_img = zoom_img_container.querySelector("img");
     let img = open_container.querySelector("img");
+    zoom_img.src = img.src;
     let rect = img.getBoundingClientRect();
 
     zoom_img.style.setProperty("--small-width", rect.width + "px");
