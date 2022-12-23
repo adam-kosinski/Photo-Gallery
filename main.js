@@ -93,7 +93,6 @@ function openImage(container){
     zoom_img.style.setProperty("--aspect-ratio", rect.width / rect.height);
 
     zoom_img_container.classList.add("trigger_open");
-    document.body.style.overflowY = "hidden"; //hide the scroll bar
 
     zoom_img.addEventListener("animationend", function finishOpeningImage(){
         zoom_img.src = "images/" + img.dataset.filename;
@@ -113,8 +112,6 @@ document.getElementById("zoom_img_container").addEventListener("click", function
     }
 });
 function closeImage(){
-    document.body.style.overflowY = "initial"; //show the scroll bar
-
     let zoom_img_container = document.getElementById("zoom_img_container");
     let zoom_img = zoom_img_container.querySelector("img");
     let img = open_container.querySelector("img");
