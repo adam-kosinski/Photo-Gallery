@@ -13,6 +13,16 @@ body {
     padding: var(--gap);
 }
 
+#title {
+    font-size: 6vw;
+    text-align: center;
+    margin: 0;
+    margin-bottom: var(--gap);
+    font-family: Allura;
+    color: white;
+    text-shadow: 0 0 10px lightgreen;
+}
+
 .row {
     display: flex;
     gap: var(--gap);
