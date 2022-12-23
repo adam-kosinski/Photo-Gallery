@@ -95,7 +95,7 @@ function openImage(container){
     zoom_img.style.width = rect.width + "px";
 
     zoom_img.style.setProperty("--small-width", rect.width + "px");
-    zoom_img.style.setProperty("--small-height", rect.height + "px");
+    zoom_img.style.setProperty("--aspect-ratio", rect.width / rect.height);
 
     zoom_img_container.classList.add("trigger_open");
     document.body.style.overflowY = "hidden"; //hide the scroll bar
