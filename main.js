@@ -108,7 +108,9 @@ function openImage(container){
 
 
 document.addEventListener("keydown", function(e){
-    if(e.key == "Escape") closeImage();
+    if(e.key == "Escape" && getComputedStyle(document.getElementById("zoom_img_container")).display == "block"){
+        closeImage();
+    }
 });
 function closeImage(){
     document.body.style.overflowY = "initial"; //show the scroll bar
