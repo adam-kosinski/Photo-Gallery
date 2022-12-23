@@ -1,5 +1,6 @@
 let centerElement; //see getCenterElement()
 let last_resize_time = -Infinity; //see scroll event handler
+let open_container; //stores the .img_container whose content we're displaying in the zoom_img_container
 
 window.addEventListener("load", function () {
     addImage(0);
@@ -46,7 +47,12 @@ function addImage(i) {
 
 
 //keep track of the most center element so that when we resize the window, we can scroll to it
-window.addEventListener("scroll", function(){
+window.addEventListener("scroll", function(e){
+    //don't let the page scroll if an image is open / being opened
+    if(getComputedStyle(document.getElementById("zoom_img_container")).display == "block"){
+        e.preventDefault();
+        return;
+    }
     if(last_resize_time + 50 < performance.now()){ //hack to prevent scrollIntoView from triggering a scroll event and changing the center element
         centerElement = getCenterElement();
     }
@@ -76,17 +82,51 @@ function getCenterElement(){
 
 
 function openImage(container){
-    let img = container.firstElementChild;
+    open_container = container;
+
+    let img = container.querySelector("img");
     let rect = img.getBoundingClientRect();
     let zoom_img_container = document.getElementById("zoom_img_container");
 
-    let img_copy = zoom_img_container.querySelector("img");
-    img_copy.src = container.firstElementChild.src;
-    img_copy.style.top = rect.top + "px";
-    img_copy.style.left = rect.left + "px";
-    img_copy.style.width = rect.width + "px";
+    let zoom_img = zoom_img_container.querySelector("img");
+    zoom_img.src = img.src;
+    zoom_img.style.top = rect.top + 0.5*rect.height + "px"; //css translates it -50%, -50% to make centering easier
+    zoom_img.style.left = rect.left + 0.5*rect.width + "px";
+    zoom_img.style.width = rect.width + "px";
 
-    // img_copy.style.setProperty("--big-width")
+    zoom_img.style.setProperty("--small-width", rect.width + "px");
+    zoom_img.style.setProperty("--small-height", rect.height + "px");
 
-    zoom_img_container.classList.add("visible");
+    zoom_img_container.classList.add("trigger_open");
+    document.body.style.overflowY = "hidden"; //hide the scroll bar
+
+    zoom_img.addEventListener("animationend", function finishOpeningImage(){
+        zoom_img.src = "images/" + img.dataset.filename;
+        zoom_img.removeEventListener("animationend", finishOpeningImage);
+    });
+}
+
+
+document.addEventListener("keydown", function(e){
+    if(e.key == "Escape") closeImage();
+});
+function closeImage(){
+    document.body.style.overflowY = "initial"; //show the scroll bar
+
+    let zoom_img_container = document.getElementById("zoom_img_container");
+    let zoom_img = zoom_img_container.querySelector("img");
+    let img = open_container.querySelector("img");
+    let rect = img.getBoundingClientRect();
+
+    zoom_img.style.setProperty("--small-width", rect.width + "px");
+    zoom_img.style.setProperty("--small-height", rect.height + "px");
+    zoom_img.style.setProperty("--top-dest", rect.top + 0.5*rect.height + "px");
+    zoom_img.style.setProperty("--left-dest", rect.left + 0.5*rect.width + "px");
+
+    zoom_img_container.classList.add("trigger_close");
+
+    zoom_img.addEventListener("animationend", function finishClosingImage(){
+        zoom_img_container.classList.remove("trigger_open", "trigger_close");
+        zoom_img.removeEventListener("animationend", finishClosingImage);
+    });
 }

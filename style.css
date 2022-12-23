@@ -53,12 +53,6 @@ img {
     outline: calc(0.025*var(--image-width)) solid white;
 }
 
-@keyframes fade_in {
-    from {opacity: 0;}
-    to {opacity: 1;}
-}
-
-
 
 #zoom_img_container {
     display: none;
@@ -77,26 +71,75 @@ img {
 }
 #zoom_img_container img {
     position: absolute;
+    transform: translate(-50%, -50%);
+    object-fit: contain;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
 }
+#close_image{
+    color: #fff8;
+    position: absolute;
+    right: 0.5rem;
+    top: 0;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+#close_image:hover {
+    color: white;
+}
 
 
-#zoom_img_container.visible {
+#zoom_img_container.trigger_open {
     display: block;
 }
-#zoom_img_container.visible img {
+#zoom_img_container.trigger_open #blackout {
+    animation-name: fade_in;
+}
+#zoom_img_container.trigger_open img {
     animation-name: expand;
 }
-#zoom_img_container.visible #blackout {
-    animation-name: fade_in;
+
+#zoom_img_container.trigger_close #blackout {
+    animation-name: fade_out;
+}
+#zoom_img_container.trigger_close img {
+    animation-name: contract;
+}
+
+
+@keyframes fade_in {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+@keyframes fade_out {
+    from {opacity: 1;}
+    to {opacity: 0;}
 }
 
 @keyframes expand {
-    from {}
+    from {
+        width: var(--small-width);
+        height: var(--small-height);
+    }
     to {
-        top: 50px;
-        left: 200px;
-        width: 600px;
+        top: 50%;
+        left: 50%;
+        width: calc(100vw - 70px);
+        height: calc(100vh - 70px);
+    }
+}
+@keyframes contract {
+    from {
+        top: 50%;
+        left: 50%;
+        width: calc(100vw - 70px);
+        height: calc(100vh - 70px);
+    }
+    to {
+        width: var(--small-width);
+        height: var(--small-height);
+        top: var(--top-dest);
+        left: var(--left-dest);
     }
 }
