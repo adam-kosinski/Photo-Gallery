@@ -141,14 +141,20 @@ document.addEventListener("click", setLastMouseEvent);
 
 function setLastMouseEvent(){
     t_last_mouseevent = performance.now();
-    document.getElementById("zoom_img_container").style.cursor = x_cursor_style;
+    let zoom_img_container = document.getElementById("zoom_img_container");
+
+    //change cursor for zoom_img_container back to an x, unless we're in the middle of closing it
+    if(zoom_img_container.classList.contains("trigger_close")){
+        zoom_img_container.style.cursor = "auto";
+    }
+    else {
+        zoom_img_container.style.cursor = x_cursor_style;
+    }
 }
 
 //check every once in a while if we went over the timeout
 setInterval(function(){
-    if(getComputedStyle(document.getElementById("zoom_img_container")).display == "block" &&
-        performance.now() - t_last_mouseevent > cursor_hide_timeout)
-    {
+    if(performance.now() - t_last_mouseevent > cursor_hide_timeout){
         document.getElementById("zoom_img_container").style.cursor = "none";
     }
 }, 500);
