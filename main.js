@@ -107,9 +107,7 @@ document.addEventListener("keydown", function(e){
     }
 });
 document.getElementById("zoom_img_container").addEventListener("click", function(e){
-    if(e.target.tagName != "IMG"){
-        closeImage();
-    }
+    closeImage();
 });
 function closeImage(){
     let zoom_img_container = document.getElementById("zoom_img_container");
@@ -130,3 +128,27 @@ function closeImage(){
         zoom_img.removeEventListener("animationend", finishClosingImage);
     });
 }
+
+
+
+//make mouse disappear after an inactivity timeout on the zoom image, for more flawless viewing
+let t_last_mouseevent = 0;
+let cursor_hide_timeout = 3000; //ms, matches YouTube's timeout hehe
+let x_cursor_style = getComputedStyle(document.getElementById("zoom_img_container")).cursor;
+
+document.addEventListener("mousemove", setLastMouseEvent);
+document.addEventListener("click", setLastMouseEvent);
+
+function setLastMouseEvent(){
+    t_last_mouseevent = performance.now();
+    document.getElementById("zoom_img_container").style.cursor = x_cursor_style;
+}
+
+//check every once in a while if we went over the timeout
+setInterval(function(){
+    if(getComputedStyle(document.getElementById("zoom_img_container")).display == "block" &&
+        performance.now() - t_last_mouseevent > cursor_hide_timeout)
+    {
+        document.getElementById("zoom_img_container").style.cursor = "none";
+    }
+}, 500);
