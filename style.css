@@ -64,11 +64,12 @@ img {
     animation-fill-mode: forwards;
 }
 
-.img_container:hover .grid_image {
-    transform: scale(0.95);
-    outline: calc(0.025*var(--image-width)) solid white;
+@media (hover: hover) {
+    .img_container:hover .grid_image {
+        transform: scale(0.95);
+        outline: calc(0.025*var(--image-width)) solid white;
+    }
 }
-
 
 #zoom_img_container {
     display: none;
@@ -96,18 +97,6 @@ img {
     --max-height: calc(100vh - 5vw);
     --big-width: min(var(--max-width), calc(var(--aspect-ratio)*var(--max-height)));
     /* --small-width and --aspect-ratio provided by js in openImage() */
-}
-#close_image{
-    color: #fff8;
-    position: absolute;
-    right: 0.5rem;
-    top: 0;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transition: all 0.5s;
-}
-#close_image:hover {
-    color: white;
 }
 
 
